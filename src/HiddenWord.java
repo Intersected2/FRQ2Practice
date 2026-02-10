@@ -1,22 +1,26 @@
-public class HiddenWord{
-    private String word = "";
-    private String  ram = "";
-    private String ram2 = "";
-    public HiddenWord(String word){
+class HiddenWord {
+    String word = "";
+
+    public HiddenWord(String word) {
         this.word = word;
     }
-    public String getHint(String gword){
-        for (int i = 0; i < word.length();i++){
-            if (word.substring(i,i + 1).equals(gword.substring(i,i + 1))){
-                ram += word.substring(i,i + 1);
-            }else {
-                for (int j = 0; j < gword.length();j++){
-                    if (word.substring(i,i + 1).equals(gword.substring(j,j + 1)) && (i != j)){
 
-                    }
+    public String getHint(String guess) {
+        String temp = "";
+        if (guess.length() > word.length()) {
+            return "Error, guess is bigger then word.";
+        }
+        for (int i = 0; i < guess.length(); i++) {
+            if (word.indexOf(guess.substring(i, i + 1)) != -1) {
+                if (guess.substring(i, i + 1).equals(word.substring(i, i + 1))) {
+                    temp += guess.substring(i, i + 1);
+                } else {
+                    temp += "+";
                 }
+            } else {
+                temp += "*";
             }
         }
-        return ram;
+        return temp;
     }
 }
